@@ -1,0 +1,36 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block extrahead %}
+    <title>Вход</title>
+{%  endblock %}
+{%  block content %}
+<div class="w-full min-h-screen flex flex-col justify-center items-center p-4">
+<div class="w-1/2 flex flex-col justify-center items-center space-y-12 bg-slate-200 shadow-lg p-4 " style="height: 600px">
+  <h1 class="text-3xl font-semibold">Вход</h1>
+  {% if form.errors %}
+    <ul>
+      {% for key,value in form.errors.items %} 
+        <li>{{ key|escape }} : {{ value|escape }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+    <form method="POST" class="flex flex-col items-center justify-center space-y-4">
+        {% csrf_token %}
+        <h2 class="text-xl font-medium">Здравей отново 🖐! </h2>
+        <p> Въведи своите данни, за да се впишеш в системата </p>
+         <div class="auth-field flex flex-col w-full">
+            <label for="id_username" class="text-lg font-semibold">Потребителско име</label>
+           {{form.username}}
+         </div>
+
+         <div class="auth-field flex flex-col  w-full">
+          <label for="id_password" class="text-lg font-semibold">Парола</label>
+         {{form.password}}
+       </div>
+        <button class="w-full p-2 bg-blue-600 text-blue-100" type="submit">Вход</button>
+    </form>
+</div>
+</div>
+{% endblock %}
+

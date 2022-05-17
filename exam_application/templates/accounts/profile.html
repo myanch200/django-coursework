@@ -1,0 +1,14 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block extrahead %}
+    <title>Login</title>
+{%  endblock %}
+{%  block content %}
+
+  <h1> Hi, {{user.username}}</h1>
+  {% if user.is_authenticated %}
+    <p>You are logged in.</p>
+  {% else %}
+    <p>You are not logged in.</p>
+  {% endif %}
+{% endblock %}

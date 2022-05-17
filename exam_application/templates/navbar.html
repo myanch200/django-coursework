@@ -1,0 +1,15 @@
+<header class="bg-blue-800 p-4 text-blue-200">
+  <nav>
+    <ul class="flex justify-end items-center space-x-6">
+      <li><a href="">Регистрации за изпит</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="">Привет, {{request.user.username}}</a></li>
+        <li><a class="p-2 bg-red-600 text-red-100" href="{% url 'accounts:logout'%}">Изход</a></li>
+      {% else %}
+        <li><a href="{% url 'accounts:login'%}">Вход</a></li>
+        <li><a href="{% url 'accounts:register'%}">Регистрация</a></li>
+      {% endif %}
+      <li><a href=""></a></li>
+    </ul>
+  </nav>
+</header>
