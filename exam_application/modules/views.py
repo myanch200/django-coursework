@@ -48,6 +48,12 @@ def show(request, module_id):
     return render(request, 'modules/show.html', context)
 
 
+def delete(request, module_id):
+    module = Module.objects.get(pk=module_id)
+    module.delete()
+    messages.success(request, 'Специалността е изтрита успешно!')
+    return render(request, 'partials/_modules_list.html', {'modules': Module.objects.all()})
+
 
 def new_exam_registration(request, module_id, exam_id):
     module = Module.objects.get(pk=module_id)
