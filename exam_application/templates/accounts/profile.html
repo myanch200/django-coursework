@@ -4,11 +4,29 @@
     <title>Login</title>
 {%  endblock %}
 {%  block content %}
-
+<div class="w-full min-h-screen flex flex-col justify-center items-center p-4">
+  <div class="w-1/2 flex flex-col justify-center items-center space-y-12 bg-slate-200 shadow-lg p-4 " style="height: 600px">
   <h1> Hi, {{user.username}}</h1>
-  {% if user.is_authenticated %}
-    <p>You are logged in.</p>
-  {% else %}
-    <p>You are not logged in.</p>
+  {% if not user.is_superuser %}
+    not admin
   {% endif %}
+  {% if form.errors %}
+    <div class="alert alert-danger">
+      {{ form.errors }}
+    </div>
+  {% endif %}
+  
+  <form method="POST" class="flex flex-col items-center justify-center space-y-4">
+    {% csrf_token %}
+    {% for field in  form %}
+      <div class="w-full">
+        {{field.label}}
+        {{ field }}
+      </div>
+      
+    {% endfor %} 
+    <button class="w-full p-2 bg-blue-600 text-blue-100" type="submit">Редактирай</button>
+</form>
+  </div>
+</div>
 {% endblock %}

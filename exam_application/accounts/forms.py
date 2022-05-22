@@ -10,13 +10,16 @@ from django.forms import fields
 class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ("first_name", "last_name",
+                  "email", "username", "password1", "password2")
         error_messages = {
             'password_missmatch': _('Паролите не съвпадат'),
         }
 
     def __init__(self, *args, **kwargs):
         super(UserRegistrationForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].label = 'Първо име'
+        self.fields['last_name'].label = 'Фамилия'
         self.fields['username'].label = 'Потребителско име'
         self.fields['email'].label = 'Имейл'
         self.fields['password1'].label = 'Парола'
@@ -30,5 +33,26 @@ class UserRegistrationForm(UserCreationForm):
             self.add_error('password2', 'Паролите не съвпадат')
 
         return password2
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'username']
+
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+        self.fields['username'].label = 'Потребителско име'
+        self.fields['email'].label = 'Имейл'
+        self.fields['first_name'].label = 'Първо име'
+        self.fields['last_name'].label = 'Фамилия'
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({'class': 'w-full px-4 py-2'})
+        self.help_text = ''
+
+
+
+
+    
 
     

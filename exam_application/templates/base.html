@@ -21,7 +21,9 @@
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 {% include "navbar.html" %}
 {% if messages %}
-{% comment %} {% include 'partials/_messages' %} {% endcomment %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.type }}">{{ message.message }}</div>
+    {% endfor %}
 {% endif %}
 
 

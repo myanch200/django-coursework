@@ -34,7 +34,7 @@ class ExamRegistration(models.Model):
     exam = models.ForeignKey(Exam, related_name="applications", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="exam_applications", on_delete=models.CASCADE)
     payment_method = models.CharField(max_length=100, choices=PAYMENT_CHOICES, default='cash')
-
+    created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.user.username + " - " + self.exam.name
 

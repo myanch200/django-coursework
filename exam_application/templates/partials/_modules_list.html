@@ -1,3 +1,4 @@
+{% if modules.count > 0 %}
 {% for module in modules %}
       <div class="flex flex-col bg-gray-100 shadow m-4 p-4">
         <div class="flex w-full justify-between">
@@ -29,3 +30,11 @@
       </div>
     {% endfor %}
 </div> 
+{% else %}
+  <div class="flex flex-col bg-gray-100 shadow m-4 p-4">
+    <div class="flex w-full justify-between">
+      <h4 class="text-2xl text-center text-blue-600 mb-2 ">Няма намерени курсове</h4>
+    </div>
+    <p class="text-center flex-1">Ти не си вписан в нито един курс, ако мислиш ,че това е грешка се свържи с твоите преподаватели.</p>
+  </div>
+{% endif %}
