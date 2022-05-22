@@ -20,6 +20,11 @@
 </head>
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 {% include "navbar.html" %}
+{% if messages %}
+{% comment %} {% include 'partials/_messages' %} {% endcomment %}
+{% endif %}
+
+
 <div  class="bg-gray-100">
 
 

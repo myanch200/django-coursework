@@ -8,9 +8,10 @@ from .forms import UserRegistrationForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 
-
-
 def user_registration(request):
+    if request.user.is_authenticated:
+        return redirect('accounts:profile')
+    
     form = UserRegistrationForm()
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
@@ -29,6 +30,9 @@ def user_registration(request):
     return render(request, 'accounts/registration.html', context)
 
 def user_login(request):
+    if request.user.is_authenticated:
+        return redirect('accounts:profile')
+  
     if request.method == 'POST':
         form = AuthenticationForm(request=request, data=request.POST)
         if form.is_valid():
@@ -46,11 +50,11 @@ def user_login(request):
     context = {'form': form}
     return render(request, 'accounts/login.html', context)
 
-
+@login_required
 def profile(request):
     return render(request, 'accounts/profile.html')
 
-
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('accounts:login')

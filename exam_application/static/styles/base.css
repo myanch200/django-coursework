@@ -1,3 +1,15 @@
 *{
   font-family: 'Poppins', sans-serif;
 }
+.messages{
+  width: 100%;
+  height: 4rem;
+  transition: all 0.5s;
+  animation: fadeIn 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.messages .success{
+  background-color: #00b300;
+  color: #fff;
+}

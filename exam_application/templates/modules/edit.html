@@ -1,0 +1,29 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block extrahead %}
+    <title>Специалности</title>
+{%  endblock %}
+{%  block content %}  
+  <section class="flex justify-center items-center h-screen w-full">
+    <form action="{% url 'modules:update_module' module.id %}" method="POST" class="flex flex-col space-y-6 bg-gray-100 rounded-lg shadow-lg p-6">
+        {% csrf_token %}
+        {% for field in form %}
+
+        {% if field.type == 'hidden' %}
+            {{ field }}
+        {% else %}
+            <div class="flex flex-col space-y-2">
+                <label for="{{ field.name }}" class="text-gray-700 text-sm font-bold">{{ field.label }}</label>
+                {{ field }}
+            </div>
+        {% endif %}
+        {% endfor %}
+        <div class="flex justify-center space-x-4">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full">
+                Добави
+            </button>
+        </div>
+    </form>
+  </section>
+  
+{% endblock %}

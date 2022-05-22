@@ -1,0 +1,39 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block extrahead %}
+    <title>Специалности</title>
+{%  endblock %}
+{%  block content %}
+  <div class="bg-orange-500 text-gray-200 flex p-4 space-x-2">
+      <svg  xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+    <p class=>
+      Вашите имена и имейл адрес ще бъдат попълнени автоматично базирано на данниг предоставени при регистрация. 
+      Ако желаете да промените нещо посетете вашият профил
+    </p>
+  </div>
+ 
+  
+  <section class="flex justify-center items-center h-screen w-full">
+    <form action="{% url 'modules:register_for_exam' module.id exam.id %}"
+          class="flex flex-col space-y-6 bg-gray-100 rounded-lg shadow-lg p-6"
+          method="POST"      
+    >
+        {% csrf_token %}
+        <p class="text-xl font-semibold">{{module.name}} - Регистрация за изпит: {{exam.name}}</p>
+        </p>
+        <label for="payment_method">Как желаете да платите</label>
+        <select name="payment_method" id="payment_method" class="p-2">
+            <option value="cash">Наложен платеж</option>
+            <option value="card">Карта</option>
+            <option value="bank transfer">Банков превод</option>
+        </select>
+        <div class="flex justify-center items-center px-3 w-full">
+          <button class="bg-blue-600 text-gray-100 py-2 w-1/2">Заяви регистрация за изпит</button>
+
+        </div>
+    </form>
+  </section>
+  
+{% endblock %}
