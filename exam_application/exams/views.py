@@ -25,3 +25,21 @@ def create_exam(request,module_id):
           return render('modules/show.html', {'module': module})
     else:
         return redirect('modules:show', module_id=module.id)
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def delete_exam(request,exam_id):
+    exam = Exam.objects.get(pk=exam_id)
+    form = ExamForm()
+    module = exam.module
+    exam.delete()
+    return render(request, 'partials/_admin_modules_dashboard.html', {'module': module,'form': form})
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def edit_exam(request,exam_id):
+    exam = Exam.objects.get(pk=exam_id)
+    module = exam.module
+    form = ExamForm(instance=exam)
+    return render(request, 'partials/_exam_form.html', {'module': module,'form': form})
+    

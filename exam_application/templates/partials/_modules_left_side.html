@@ -15,8 +15,10 @@
       {% include 'partials/_exams_list.html' with module=module %}
       
     </div>
-  
+    
     {% if user.is_superuser %}
+    <div id="examForm">
       {% include 'partials/_exam_form.html' with module=module form=form %}
+    </div>
     {% endif %}
 </div>
