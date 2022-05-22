@@ -9,12 +9,9 @@
 {%  endblock %}
 {%  block content %}
 
-  <div class="flex justify-between ">
-    {% include 'partials/_modules_left_side.html' with module=module %}
+  <div class="flex justify-between" id="modulesDashboard">
+    {% include 'partials/_admin_modules_dashboard.html' with module=module form=form %}
 
-    {% if user.is_superuser %}
-      {% include 'partials/_modules_right_side.html' with module=module %}
-    {% endif %}
 
   </div>
 {% endblock %}

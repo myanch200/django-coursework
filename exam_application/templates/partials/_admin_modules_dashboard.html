@@ -1,0 +1,5 @@
+{% include 'partials/_modules_left_side.html' with module=module form=form %}
+   
+{% if user.is_superuser %}
+  {% include 'partials/_modules_right_side.html' with module=module %}
+{% endif %}

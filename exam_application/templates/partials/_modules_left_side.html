@@ -1,34 +1,22 @@
 {% load exam_params %}
 <div class="w-1/2 p-4">
   <h1 class="text-2xl font-bold">{{module.name}}</h1>
-  {% if module.exams.count > 0 %}
-      {% for exam in module.exams.all %}
-      <div class="flex justify-between mt-4">
-        <div class="w-1/2">
-          <div class="flex space-x-3 mb-2">
-            <h2 class="text-xl font-bold">{{exam.name}}
-            </h2>
-            {% if request.user and request.user.id|exam_params:exam.id %}
-                <span class="bg-green-500 text-gray-100 px-2 py-1 rounded">Регистриран</span>
-            {% endif %}
-
-          </div>
-          <p class="text-sm">{{exam.description}}</p>
-          <p>Краен срок: <span class="font-semibold text-blue-600">{{exam.humanize_date}}</span></p>
-          {% if user_is_participant and not request.user.id|exam_params:exam.id %}
-            <div class="flex justify-between items-center my-2">
-              <p class="">Ти си част от този курс:</p>
-              <a href="{% url 'modules:new_exam_registration' module.id exam.id %}" class="bg-blue-600 text-blue-200 px-2 w-full py-2 rounded shadow-md">Регистрирай се за изпита</a>
-            </div>
-          {% endif %}
-        </div>
-        <div class="w-1/2">
-          {% comment %} <a href="{{exam.get_absolute_url}}" class="btn btn-primary">Провери</a> {% endcomment %}
-        </div>
-      </div>
-    {% endfor %}
+  <div class="flex flex-col w-full my-4">
+    <h3 class="text-xl font-semibold">Описание</h3>
+  {% if module.description %}
+    <p>{{module.description}}</p>
   {% else %}
-    <p>Няма налични изпити за този курс</p>
+    <p>Няма описание добави  
+      <a href="{% url 'modules:edit_module' module.id %}" class="text-blue-600 text underline">тук</a>
+    </p>
   {% endif %}
-    
+  </div>
+     <div id="exams">
+      {% include 'partials/_exams_list.html' with module=module %}
+      
+    </div>
+  
+    {% if user.is_superuser %}
+      {% include 'partials/_exam_form.html' with module=module form=form %}
+    {% endif %}
 </div>

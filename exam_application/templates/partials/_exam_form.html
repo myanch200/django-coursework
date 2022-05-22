@@ -1,0 +1,12 @@
+<form hx-post="{% url 'exams:create_exam' module.id %}" 
+      hx-target ="#modulesDashboard"
+      action="{% url 'exams:create_exam' module.id %}" 
+      class="form flex flex-col space-y-4 p-4"
+  >
+  {% csrf_token %}
+  {{form}}
+  <div class="flex flex-row justify-центер">
+    <button class="bg-blue-600 text-white w-full p-2" type="submit">Създай</button>
+  </div>
+ 
+</form>

@@ -1,3 +1,5 @@
+from django.utils.timezone import now
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -24,6 +26,8 @@ class Exam(models.Model):
     def humanize_date(self):
         return self.exam_date.strftime("%d.%m.%Y %H:%M")
 
+    def is_valid(self):
+        return datetime.strptime(self.exam_date, "%Y-%m-%d %HH:mm") > now() and self.name and self.description
 class ExamRegistration(models.Model):
     PAYMENT_CHOICES = (
       ('cash', 'В брой'),

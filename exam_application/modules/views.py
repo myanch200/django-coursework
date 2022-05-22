@@ -5,11 +5,11 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.admin.views.decorators import user_passes_test
 from helpers import check_superuser
 from django.contrib import messages
+from exams.forms import ExamForm
 from .forms import ModuleForm
 from .models import Module
 # Create your views here.
 def index(request):
-    
     if request.user.is_superuser:
       modules = Module.objects.all()
     else:
@@ -19,10 +19,12 @@ def index(request):
 
 def show(request, module_id):
     module = Module.objects.get(pk=module_id)
+    form = ExamForm()
     user_is_participant = request.user in module.participants.all()
     context = {
         'module': module,
         'user_is_participant': user_is_participant,
+        'form': form
     }
     return render(request, 'modules/show.html', context)
 
