@@ -38,6 +38,9 @@ class ExamRegistration(models.Model):
     def __str__(self):
         return self.user.username + " - " + self.exam.name
 
+    def get_payment_method_display(self):
+        return dict(self.PAYMENT_CHOICES).get(self.payment_method)
+
     
 
     
