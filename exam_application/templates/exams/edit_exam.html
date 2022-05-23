@@ -1,0 +1,22 @@
+
+{% extends '../base.html' %}
+{% load static %}
+{% block extrahead %}
+    <title>Специалности</title>
+{%  endblock %}
+{%  block content %}  
+  <section class="flex justify-center items-center h-screen w-full">
+    <form action="" 
+      method="POST"
+      class="form flex flex-col space-y-4 p-4"
+  >
+  {% csrf_token %}
+  {{form}}
+  <div class="flex flex-row justify-центер">
+    <button class="bg-blue-600 text-white w-full p-2" type="submit">Редактирай</button>
+  </div>
+ 
+</form>
+  </section>
+  
+{% endblock %}

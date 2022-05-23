@@ -1,3 +1,4 @@
+from operator import mod
 from django.shortcuts import render,redirect
 from django.contrib.admin.views.decorators import user_passes_test
 from modules.models import ExamRegistration, Module, Exam
@@ -27,6 +28,7 @@ def create_exam(request,module_id):
         return redirect('modules:show', module_id=module.id)
 
 
+
 @user_passes_test(lambda u: u.is_superuser)
 def delete_exam(request,exam_id):
     exam = Exam.objects.get(pk=exam_id)
@@ -37,9 +39,17 @@ def delete_exam(request,exam_id):
 
 
 @user_passes_test(lambda u: u.is_superuser)
-def edit_exam(request,exam_id):
+def edit_exam(request,module_id, exam_id):
+    module = Module.objects.get(pk=module_id)
     exam = Exam.objects.get(pk=exam_id)
-    module = exam.module
     form = ExamForm(instance=exam)
-    return render(request, 'partials/_exam_form.html', {'module': module,'form': form})
-    
+    if request.method =='POST':
+        form = ExamForm(request.POST, instance=exam)
+        if form.is_valid():
+            form.save()
+            form = ExamForm()
+            return render(request, 'modules/show.html', {'module': module,'form': form})
+        else:
+            messages.add_message(request, messages.ERROR, 'Невалидни данни!')
+            return render(request, 'modules/show.html', {'module': module})
+    return render(request, 'exams/edit_exam.html', {'module': module,'form': form})
