@@ -18,8 +18,9 @@ from django.urls import path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
-
+from accounts.views import profile
 urlpatterns = [
+    path('', profile, name = 'langin' ),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('modules/', include('modules.urls')),
