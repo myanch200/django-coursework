@@ -23,6 +23,8 @@ class ModuleForm(forms.ModelForm):
         self.fields['name'].label = 'Име на специалността'
         self.fields['description'].label = 'Описание'
         self.fields['participants'].label = 'Студенти'
+        self.fields['participants'].required = False
+
 
 
 

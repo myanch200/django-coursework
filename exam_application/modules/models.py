@@ -21,7 +21,7 @@ CharField - също приема параметър choices, което ни п
 class Module(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    participants = models.ManyToManyField(User, related_name='modules')
+    participants = models.ManyToManyField(User, related_name='modules', blank=True)
 
     def __str__(self):
         return self.name
