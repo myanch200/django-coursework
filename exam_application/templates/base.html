@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +18,13 @@
     {% endblock extrahead %}
 </head>
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
+{% comment %} 
+Това е основната хтмл страница от която всички други наследяват 
+в нея обикновено включване неща като javascript, css линкове 
+и библиотеки, които се използват в проекта.
+{% endcomment %}
+
 {% include "navbar.html" %}
 {% if messages %}
     {% for message in messages %}
@@ -29,7 +35,9 @@
 
 <div  class="bg-gray-100">
 
-
+{% comment %} 
+ block content е  блок от хтмл който ще бъде уникален за всяка страница
+{% endcomment %}
 {% block content %}
 {% endblock content %}
 

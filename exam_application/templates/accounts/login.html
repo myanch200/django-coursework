@@ -1,4 +1,10 @@
+
 {% extends '../base.html' %}
+{% comment %} 
+
+Разиряваме това, което ни дава base.html и добавяме формата за влизане в сайта
+ако задължително включваме и csrf_token в нев.
+{% endcomment %}
 {% load static %}
 {% block extrahead %}
     <title>Вход</title>
@@ -29,6 +35,10 @@
          {{form.password}}
        </div>
         <button class="w-full p-2 bg-blue-600 text-blue-100" type="submit">Вход</button>
+        <p>
+            <span class="font-bold text-blue-600">Нямате акаунт?</span>
+             <a class="underline blue-900" href="{% url 'accounts:register' %}">Регистрирай се</a>
+        </p>
     </form>
 </div>
 </div>

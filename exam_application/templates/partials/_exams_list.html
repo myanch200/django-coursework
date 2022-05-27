@@ -6,6 +6,9 @@
           <div class="flex space-x-3 mb-2">
             <div class="flex w-full justify-left space-x-4">
               <h4 class="text-2xl text-center text-blue-600 mb-2 ">{{exam.name}}</h4>
+              {% if request.user and request.user.id|exam_params:exam.id %}
+                <span class="bg-green-500 text-gray-100 h-10 px-2 py-1 rounded">Регистриран</span>
+              {% endif %}
               {% if request.user.is_superuser %}
                <div class="flex justify-around space-x-6">
                  <div>
@@ -33,9 +36,7 @@
                    
               {% endif %}
             </div>
-            {% if request.user and request.user.id|exam_params:exam.id %}
-                <span class="bg-green-500 text-gray-100 px-2 py-1 rounded">Регистриран</span>
-            {% endif %}
+            
           </div>
           <p class="text-sm">{{exam.description}}</p>
           <p>Краен срок: <span class="font-semibold text-blue-600">{{exam.humanize_date}}</span></p>
@@ -47,9 +48,6 @@
               </div>
             {% endif %}
           {% endif %}
-        </div>
-        <div class="w-1/2">
-          {% comment %} <a href="{{exam.get_absolute_url}}" class="btn btn-primary">Провери</a> {% endcomment %}
         </div>
       </div>
 {% endfor %}

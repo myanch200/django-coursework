@@ -5,9 +5,16 @@ from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import gettext_lazy as _
 
 from django.forms import fields
+"""
+във този файл се намират всички наши форми във повечето случаи отново използваме наследяването, 
+за да можем да наследим куп атрибути и функционалности от джанго класове
 
+"""
 
+# В този случаи имаме регистрационна форма, която наследява атрибути и функционалност от UserCreationForm
 class UserRegistrationForm(UserCreationForm):
+  # в класа мета описваме кой е моделът върху който формата ще се изпълни кои полета са ни нужни и можем да правим 
+  # много различни неща като да зададем собствени съобщения при случай на грешка
     class Meta:
         model = User
         fields = ("first_name", "last_name",
@@ -16,6 +23,8 @@ class UserRegistrationForm(UserCreationForm):
             'password_missmatch': _('Паролите не съвпадат'),
         }
 
+    # тук определяме неща като какво вид html да използва за всяко от полета на този модел
+    # можем да зададем и наши преводи на имената на тези полета
     def __init__(self, *args, **kwargs):
         super(UserRegistrationForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].label = 'Първо име'
@@ -34,7 +43,7 @@ class UserRegistrationForm(UserCreationForm):
 
         return password2
 
-
+# Профил формата наследява от ModelForm,което ни дава достъп до какви полета да има и какъв ще е моделът отново
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = User
